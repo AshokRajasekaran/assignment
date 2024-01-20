@@ -64,7 +64,19 @@ const search = async (req, res) => {
   const userId = parseInt(req.params.userId);
 
   db.all(
-    `SELECT id, name, id in (SELECT friendId from Friends where userId = ${userId}) as connection from Users where name LIKE '${query}%' LIMIT 20;`
+    `SELECT user.id, user.name,
+    CASE
+      WHEN friends.friendId IS NOT NULL THEN 1
+      WHEN friendsOfFriends.friendId IS NOT NULL THEN 2
+      ELSE 0
+    END AS connection
+  FROM Users user
+  LEFT JOIN Friends friends ON user.id = friends.friendId AND friends.userId = ${userId}
+  LEFT JOIN Friends friendsOfFriends ON user.id = friendsOfFriends.friendId
+                      AND friendsOfFriends.userId IN (SELECT friends.friendId FROM Friends friends WHERE friends.userId = ${userId})
+  WHERE user.name LIKE '%${query}%'
+  GROUP BY user.id, user.name
+  LIMIT 20;`
   )
     .then((results) => {
       res.statusCode = 200;

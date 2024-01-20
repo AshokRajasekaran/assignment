@@ -1,4 +1,4 @@
 const app = require("./app");
 const user = require("./user");
 
-user.init().then(() => app.listen(3001));
+user.init().then(() => app.listen(process.env.PORT));
