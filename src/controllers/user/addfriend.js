@@ -1,21 +1,14 @@
-const db = require("../../utils/database");
+const { userService } = require("../../services/index");
 
 const addFriend = async (req, res) => {
+  try {
     const { userId, friendId } = req.params;
-    db.run(
-      `INSERT INTO Friends (userId, friendId) VALUES (${userId}, ${friendId}), (${friendId}, ${userId})`
-    )
-      .then((response) => {
-        console.log(response);
-        res.statusCode = 200;
-        res.json({
-          success: true,
-        });
-      })
-      .catch((err) => {
-        res.statusCode = 500;
-        res.json({ success: false, error: err });
-      });
-  };
-  
-  module.exports = addFriend;
+    await userService.addConnection(userId, friendId);
+    res.statusCode = 200;
+    res.json({
+      success: true,
+    });
+  } catch (err) {}
+};
+
+module.exports = addFriend;
