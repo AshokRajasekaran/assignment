@@ -14,6 +14,8 @@ const searchConnections = async (userId, query) => {
   // WHERE user.name LIKE '%${query}%'
   // GROUP BY user.id, user.name
   // LIMIT 20;`;
+
+  // SQL query to search for connections and calculate the connection range using recursive common table expression (REF: https://builtin.com/data-science/recursive-sql)
   const searchQuery = `WITH FriendsCircle AS (
         SELECT friendId , 
         1 AS connectionRange

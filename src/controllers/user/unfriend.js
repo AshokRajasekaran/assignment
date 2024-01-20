@@ -1,5 +1,7 @@
 const { userService } = require("../../services/index");
+const errorHandler = require("../../utils/error-handler");
 
+// Handler function to remove a friend from connection.
 const unFriend = async (req, res) => {
   try {
     const { userId, friendId } = req.params;
@@ -8,7 +10,9 @@ const unFriend = async (req, res) => {
     res.json({
       success: true,
     });
-  } catch (err) {}
+  } catch (err) {
+    errorHandler(res, err);
+  }
 };
 
 module.exports = unFriend;

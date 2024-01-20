@@ -1,5 +1,7 @@
 const { userService } = require("../../services/index");
+const errorHandler = require("../../utils/error-handler");
 
+// Handler function for searching connection for a user.
 const search = async (req, res) => {
   try {
     const query = req.params.query;
@@ -10,7 +12,9 @@ const search = async (req, res) => {
       success: true,
       users,
     });
-  } catch (err) {}
+  } catch (err) {
+    errorHandler(res, err);
+  }
 };
 
 module.exports = search;
