@@ -1,0 +1,23 @@
+{
+  "name": "assessment-101",
+  "version": "1.0.0",
+  "description": "search-optimisation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AshokRajasekaran/assessment-101.git"
+  },
+  "author": "Ashok Rajasekaran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AshokRajasekaran/assessment-101/issues"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "sqlite3": "^5.0.2"
+  },
+  "homepage": "https://github.com/AshokRajasekaran/assessment-101#readme"
+}
